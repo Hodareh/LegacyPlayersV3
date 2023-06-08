@@ -50,7 +50,7 @@ impl CombatLogParser for WoWWOTLKParser {
                     let _arena_team3 = args[12];
                     let _arena_team5 = args[13];
 
-                    let mut participant = self.participants.entry(unit_guid).or_insert_with(|| Participant::new(unit_guid, true, unit_name, 0));
+                    let participant = self.participants.entry(unit_guid).or_insert_with(|| Participant::new(unit_guid, true, unit_name, 0));
 
                     if race != "nil" && participant.race_id.is_none() {
                         participant.race_id = Some(match race.as_str() {

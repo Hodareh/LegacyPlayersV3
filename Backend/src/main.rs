@@ -7,7 +7,7 @@
 #![allow(clippy::collapsible_if)]
 #![allow(clippy::from_str_radix_10)]
 #![allow(dead_code)]
-#![feature(proc_macro_hygiene, decl_macro, option_result_contains, test)]
+#![feature(proc_macro_hygiene, decl_macro, test)]
 #![feature(box_patterns)]
 extern crate byteorder;
 extern crate chrono;
@@ -44,6 +44,9 @@ use rocket_okapi::swagger_ui::{make_swagger_ui, SwaggerUIConfig, UrlObject};
 use rocket_prometheus::PrometheusMetrics;
 
 use crate::modules::{account, armory, data, instance, live_data_processor, tooltip, utility};
+
+#[allow(unused_imports)]
+use option_ext::OptionExt;
 
 #[cfg(test)]
 mod tests;

@@ -1,4 +1,5 @@
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+
 pub struct TableFilter<T> {
     pub filter: Option<T>,
     pub sorting: Option<bool>,
@@ -16,12 +17,14 @@ pub trait ApplyFilter<T> {
 
 impl<T: PartialEq> ApplyFilter<T> for TableFilter<T> {
     fn apply_filter(&self, input: T) -> bool {
+        use option_ext::OptionExt;
         self.filter.is_none() || self.filter.contains(&input)
     }
 }
 
 impl ApplyFilter<Option<String>> for TableFilter<String> {
     fn apply_filter(&self, input: Option<String>) -> bool {
+//		use option_ext::OptionExt;
         self.filter.is_none() || input.is_some() && input.as_ref().unwrap().to_lowercase().contains(&self.filter.as_ref().unwrap().to_lowercase())
     }
 }
@@ -32,12 +35,14 @@ pub trait ApplyFilterTs<T> {
 
 impl ApplyFilterTs<u64> for TableFilter<u64> {
     fn apply_filter_ts(&self, input: u64) -> bool {
+		use option_ext::OptionExt;
         self.filter.is_none() || self.filter.map(|filter_ts| input >= filter_ts && input <= filter_ts + 24 * 60 * 60).contains(&true)
     }
 }
 
 impl ApplyFilterTs<Option<u64>> for TableFilter<u64> {
     fn apply_filter_ts(&self, input: Option<u64>) -> bool {
+		use option_ext::OptionExt;
         self.filter.is_none() || input.is_some() && self.filter.map(|filter_ts| input.unwrap() >= filter_ts && input.unwrap() <= filter_ts + 24 * 60 * 60).contains(&true)
     }
 }

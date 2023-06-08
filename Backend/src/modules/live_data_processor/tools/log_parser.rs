@@ -1,3 +1,4 @@
+use option_ext::OptionExt;
 use std::cmp::Ordering;
 use std::collections::{BTreeSet, HashMap, VecDeque};
 
@@ -19,7 +20,7 @@ pub fn parse_cbl(parser: &mut impl CombatLogParser, live_data_processor: &LiveDa
 
     // Pre processing
     // TODO: Handle 31/12 => 01/01 raids
-    let current_year = NaiveDateTime::from_timestamp((start_parse / 1000) as i64, 0).year();
+    let current_year = NaiveDateTime::from_timestamp_opt((start_parse / 1000) as i64, 0)?.year();
     for line in file_content.split('\n').into_iter() {
         let meta = line.split("  ").collect::<Vec<&str>>();
         if meta.len() != 2 {

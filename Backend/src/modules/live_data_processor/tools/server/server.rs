@@ -1,5 +1,6 @@
 #![allow(clippy::comparison_chain)]
 
+use option_ext::OptionExt;
 use std::collections::{BTreeSet, VecDeque};
 
 use chrono::{Datelike, NaiveDateTime, Timelike};
@@ -704,15 +705,15 @@ impl Server {
                     active_instance.entered < instance_reset.reset_time - 7 * 24 * 60 * 60 * 1000
                 } else {
                     // By default we assume wednesday reset 6 AM
-                    let mut reset_time = NaiveDateTime::from_timestamp(now() as i64, 0);
-                    let day_from_mon = reset_time.weekday().num_days_from_monday();
+                    let mut reset_time = NaiveDateTime::from_timestamp_opt(now() as i64, 0);
+                    let day_from_mon = reset_time.expect("Not a weekday").weekday().num_days_from_monday();
                     if day_from_mon < 2 {
-                        reset_time = reset_time.checked_add_signed(Duration::days(day_from_mon as i64)).unwrap();
+                        reset_time = reset_time.expect("Not a time").checked_add_signed(Duration::days(day_from_mon as i64));
                     } else if day_from_mon > 2 {
-                        reset_time = reset_time.checked_add_signed(Duration::days((9 - day_from_mon) as i64)).unwrap();
+                        reset_time = reset_time.expect("Not a time").checked_add_signed(Duration::days((9 - day_from_mon) as i64));
                     }
-                    reset_time = reset_time.checked_sub_signed(Duration::days(7)).unwrap();
-                    let reset_time = reset_time.with_hour(6).expect("Should be valid").timestamp_millis() as u64;
+                    reset_time = reset_time.expect("Not a time").checked_sub_signed(Duration::days(7));
+                    let reset_time = reset_time.expect("Not a time").with_hour(6).expect("Should be valid").timestamp_millis() as u64;
                     active_instance.entered < reset_time
                 }
             })

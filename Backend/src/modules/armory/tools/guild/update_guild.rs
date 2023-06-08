@@ -19,7 +19,7 @@ impl UpdateGuild for Armory {
               "guild_name" => guild_name.clone()
             ),
         ) {
-            let mut guild = guilds.get_mut(&guild_id).unwrap();
+            let guild = guilds.get_mut(&guild_id).unwrap();
             guild.name = guild_name;
             return Ok(());
         }

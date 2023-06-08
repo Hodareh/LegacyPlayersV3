@@ -1,3 +1,4 @@
+use option_ext::OptionExt;
 use crate::modules::live_data_processor::domain_value::{Event, EventParseFailureAction, EventType, Unit};
 use std::collections::{BTreeSet, VecDeque};
 

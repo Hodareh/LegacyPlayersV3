@@ -1,3 +1,4 @@
+use option_ext::OptionExt;
 use crate::params;
 use crate::util::database::*;
 use str_util::{random, sha3};

@@ -1,4 +1,4 @@
-FROM ranadeeppolavarapu/nginx-http3
+FROM ghcr.io/ranadeeppolavarapu/nginx-http3
 
 RUN mkdir -p /etc/nginx/cert
 RUN mkdir -p /var/www/html/model_viewer

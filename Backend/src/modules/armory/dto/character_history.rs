@@ -1,3 +1,4 @@
+use option_ext::OptionExt;
 use crate::modules::armory::dto::ArenaTeamDto;
 use crate::{
     dto::CheckPlausability,

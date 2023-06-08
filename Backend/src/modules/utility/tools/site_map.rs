@@ -27,7 +27,7 @@ impl SiteMap for Utility {
                                                                  urlencoding::encode(&character.last_update.as_ref().unwrap().character_name))
                     .replace("&", "&amp;").replace("'", "&apos;")
                     .replace("\"", "&quot;").replace("<", "&lt;").replace(">", "&gt;")));
-                result_str.push(format!("<lastmod>{}</lastmod>", NaiveDateTime::from_timestamp(character.last_update.as_ref().unwrap().timestamp as i64, 0)
+                result_str.push(format!("<lastmod>{}</lastmod>", NaiveDateTime::from_timestamp_opt(character.last_update.as_ref().unwrap().timestamp as i64, 0).expect("Not a timestamp")
                     .format("%Y-%m-%d").to_string()));
                 result_str.push("</url>".to_owned());
             });

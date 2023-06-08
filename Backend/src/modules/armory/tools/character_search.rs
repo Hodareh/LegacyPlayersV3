@@ -1,3 +1,4 @@
+use option_ext::OptionExt;
 use std::cmp::Ordering;
 
 use crate::modules::armory::material::{Character, Guild};

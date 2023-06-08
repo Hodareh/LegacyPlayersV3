@@ -77,7 +77,7 @@ impl CreateCharacterHistory for Armory {
         );
         if let Ok(character_history_res) = self.get_character_history_by_value(db_main, character_id, character_history_dto, timestamp) {
             let mut characters = self.characters.write().unwrap();
-            let mut character = characters.get_mut(&character_id).unwrap();
+            let character = characters.get_mut(&character_id).unwrap();
             character.history_moments.push(HistoryMoment {
                 id: character_history_res.id,
                 timestamp: character_history_res.timestamp,

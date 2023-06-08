@@ -1,5 +1,6 @@
 #![allow(clippy::if_same_then_else)]
 
+use option_ext::OptionExt;
 use crate::modules::data::tools::{RetrieveEncounterNpc, RetrieveItem};
 use crate::modules::data::Data;
 use crate::modules::live_data_processor::domain_value::get_spell_components_total;

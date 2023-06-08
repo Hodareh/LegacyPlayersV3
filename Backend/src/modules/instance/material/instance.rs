@@ -1,3 +1,4 @@
+use option_ext::OptionExt;
 use std::collections::HashMap;
 use std::sync::{Arc, RwLock};
 
@@ -209,9 +210,9 @@ fn calculate_speed_kills(instance_metas: Arc<RwLock<(u32, HashMap<u32, InstanceM
 fn calculate_season_index(ts: u64) -> u8 {
     static FIRST_SEASON_YEAR: i32 = 2020;
     static SEASON_DURATION: i32 = 3;
-    let today = NaiveDateTime::from_timestamp((ts / 1000) as i64, 0);
-    let year = today.year();
-    let month = today.month() as i32;
+    let today = NaiveDateTime::from_timestamp_opt((ts / 1000) as i64, 0);
+    let year = today.expect("No year?").year();
+    let month = today.expect("No month?").month() as i32;
     let months_since = (year - FIRST_SEASON_YEAR) * 12 + month;
     if (months_since % SEASON_DURATION) == 0 {
         return (months_since / SEASON_DURATION) as u8;

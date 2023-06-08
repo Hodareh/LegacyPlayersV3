@@ -32,7 +32,7 @@ impl UpdateMeta for Instance {
         "privacy_type" => instance_privacy.privacy_option, "privacy_ref" => instance_privacy.privacy_group)) {
             {
                 let mut instance_metas = self.instance_metas.write().unwrap();
-                let mut instance_meta = instance_metas.1.get_mut(&instance_privacy.instance_meta_id).ok_or(InstanceFailure::InvalidInput)?;
+                let instance_meta = instance_metas.1.get_mut(&instance_privacy.instance_meta_id).ok_or(InstanceFailure::InvalidInput)?;
                 instance_meta.privacy_type = PrivacyType::new(instance_privacy.privacy_option, instance_privacy.privacy_group);
             }
 

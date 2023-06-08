@@ -1,3 +1,4 @@
+use option_ext::OptionExt;
 use std::collections::HashMap;
 
 use crate::modules::armory::Armory;

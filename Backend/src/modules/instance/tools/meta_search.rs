@@ -1,3 +1,4 @@
+use option_ext::OptionExt;
 use crate::dto::{ApplyFilter, ApplyFilterTs, SearchResult};
 use crate::modules::armory::dto::SearchGuildDto;
 use crate::modules::armory::Armory;

@@ -1,3 +1,4 @@
+use option_ext::OptionExt;
 use okapi::openapi3::Responses;
 use rocket::{
     http::Status,

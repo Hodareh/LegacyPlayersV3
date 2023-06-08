@@ -31,7 +31,7 @@ impl UpdateAddonPaste for Utility {
     fn replace_addon_paste(&self, db_main: &mut (impl Select + Execute), paste: PasteDto, member_id: u32, account: &Account) -> Result<u32, UtilityFailure> {
         if let Some(id) = paste.id {
             let mut addon_pastes = self.addon_pastes.write().unwrap();
-            let mut i_paste = addon_pastes.get_mut(&id).ok_or(UtilityFailure::InvalidInput)?;
+            let i_paste = addon_pastes.get_mut(&id).ok_or(UtilityFailure::InvalidInput)?;
             if i_paste.member_id != member_id {
                 let members = account.member.read().unwrap();
                 let member = members.get(&member_id).unwrap();

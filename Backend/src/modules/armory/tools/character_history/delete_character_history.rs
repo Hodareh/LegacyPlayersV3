@@ -1,3 +1,4 @@
+use option_ext::OptionExt;
 use crate::params;
 use crate::util::database::*;
 
@@ -27,7 +28,7 @@ impl DeleteCharacterHistory for Armory {
                 cache_char_history.remove(&character_history_id);
             }
 
-            let mut character = characters.get_mut(&character_history.character_id).unwrap();
+            let character = characters.get_mut(&character_history.character_id).unwrap();
             let (hm_index, _) = character.history_moments.iter().enumerate().find(|(_index, history_moment)| history_moment.id == character_history_id).unwrap();
             character.history_moments.remove(hm_index);
             if character.last_update.contains(&character_history) {
